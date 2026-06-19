@@ -1,4 +1,6 @@
+import { PRODUCT_DESCRIPTION_PROMPT } from "../constants/prompt.js";
 import productModel from "../models/Product.js";
+import promptAi from "../utils/ai.js";
 import uploadFiles from "../utils/fileUploader.js";
 
 const getAllProducts = async (payload) => {
@@ -38,8 +40,14 @@ const createProduct = async (payload, files, userId) => {
   const uploadedFiles = await uploadFiles(files);
   const imageUrls = uploadedFiles.map((item) => item.url);
 
+  const promptMessage = PRODUCT_DESCRIPTION_PROMPT.replace("%s", payload.name)
+    .replace("%s", payload.category)
+    .replace("%s", payload.brand);
+
+  const description = payload.description ?? (await promptAi(promptMessage));
   return await productModel.create({
     ...payload,
+    description,
     imageUrls,
     createdBy: userId,
   });
@@ -50,7 +58,7 @@ const updateProduct = async (id, payload, files) => {
 
   const updateData = data;
 
-  if(files && files.length > 0){
+  if (files && files.length > 0) {
     const uploadedFiles = await uploadFiles(files);
     const imageUrls = uploadedFiles.map((item) => item.url);
     updateData.imageUrls = imageUrls;
