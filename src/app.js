@@ -28,7 +28,6 @@ app.get("/", (req, res) => {
   res.send({
     name: config.name,
     version: config.version,
-    featureAdminEnabled: config.feature.admin.enabled,
   });
 });
 
@@ -64,3 +63,5 @@ app.use(errorMiddleware);
 // app.listen(config.port, () => {
 //   console.log(`Server is running on port ${config.port}....`);
 // });
+
+export default app;
