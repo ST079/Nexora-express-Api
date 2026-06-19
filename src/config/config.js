@@ -24,6 +24,7 @@ const config = {
     api_secret: process.env.CLOUDINARY_API_SECRET || "",
   },
   emailApiKey: process.env.EMAIL_API_KEY || "",
+  geminiApiKey: process.env.GEMINI_API_KEY || "",
 };
 
 export default config;

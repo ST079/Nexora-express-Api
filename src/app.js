@@ -60,7 +60,7 @@ app.use(process.env.VERSION + "/orders", auth, orderRoutes);
 //Middleware for handling errors
 app.use(errorMiddleware);
 
-// Server
-app.listen(config.port, () => {
-  console.log(`Server is running on port ${config.port}....`);
-});
+// // Server
+// app.listen(config.port, () => {
+//   console.log(`Server is running on port ${config.port}....`);
+// });
