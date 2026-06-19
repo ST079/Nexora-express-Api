@@ -39,6 +39,9 @@ app.use(bodyParser.json());
 
 app.use(logger);
 
+app.set('view engine', 'hbs');
+
+
 // Routes
 app.use(
   process.env.VERSION + "/products",
@@ -60,8 +63,8 @@ app.use(process.env.VERSION + "/orders", auth, orderRoutes);
 app.use(errorMiddleware);
 
 // Server
-app.listen(config.port, () => {
-  console.log(`Server is running on port ${config.port}....`);
-});
+// app.listen(config.port, () => {
+//   console.log(`Server is running on port ${config.port}....`);
+// });
 
-// export default app;
+export default app;
