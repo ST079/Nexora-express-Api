@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import cors from "cors";
+
 import express from "express";
 import multer from "multer";
 import connectCloudinary from "./config/cloudinary.js";
@@ -21,6 +23,9 @@ import orderRoutes from "./routes/order.route.js";
 //aaba yo aap le sabai kaam garnu milxa express ma,
 // server banaune, route haru define garne, middleware haru use garne, etc.
 const app = express();
+
+app.use(cors());
+
 // const upload = multer({ dest: "uploads/" });
 const upload = multer({ storage: multer.memoryStorage() }); //temp storage in ram to get buffer.
 
@@ -39,8 +44,7 @@ app.use(bodyParser.json());
 
 app.use(logger);
 
-app.set('view engine', 'hbs');
-
+app.set("view engine", "hbs");
 
 // Routes
 app.use(
