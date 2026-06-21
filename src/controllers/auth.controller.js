@@ -9,10 +9,10 @@ const login = async (req, res) => {
     const token = generateJwt(user);
 
     //storing token in cookie key, value
-    res.cookie("authToken", token, { maxAge: 86400 * 1000 });
+    res.cookie("nexora_token", token, { maxAge: 86400 * 1000 });
 
     if (user) {
-      res.json({ message: "Login successful", token: token });
+      res.json({ message: "Login successful", token: token, user: user });
     }
   } catch (error) {
     res.status(error.status || 400).send({ message: error?.message });
@@ -25,9 +25,9 @@ const register = async (req, res) => {
     const newUser = await authService.register(payload);
     const token = generateJwt(newUser);
 
-    res.cookie("authToken", token, { maxAge: 86400 * 1000 });
+    res.cookie("nexora_token", token, { maxAge: 86400 * 1000 });
 
-    res.json({ message: "Registration successful", registeredUser: newUser });
+    res.json({ message: "Registration successful", registeredUser: newUser, token: token });
   } catch (error) {
     res.status(error.status || 400).send({ message: error?.message });
   }
