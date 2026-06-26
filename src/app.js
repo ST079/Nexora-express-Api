@@ -55,7 +55,6 @@ app.use(process.env.VERSION + "/products", productRoutes);
 app.use(
   process.env.VERSION + "/users",
   auth,
-  upload.single("image"),
   userRoutes,
 );
 

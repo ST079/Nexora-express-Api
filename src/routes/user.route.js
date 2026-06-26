@@ -5,7 +5,11 @@ import { updateRolesSchema, userSchema } from "../libs/schemas/user.schema.js";
 import checkRole from "../middlewares/checkRole.js";
 import { ROLE_ADMIN } from "../constants/roles.js";
 import { check } from "zod";
+import multer from "multer";
+
 const router = express.Router();
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 /**
  * GET /api/v1/users/
@@ -31,6 +35,7 @@ router.get("/:id", checkRole(ROLE_ADMIN), userController.getUserById);
 router.post(
   "/",
   checkRole(ROLE_ADMIN),
+  upload.single("image"),
   validate(userSchema),
   userController.createUser,
 );
@@ -38,12 +43,20 @@ router.post(
 /**
  * Put /api/v1/users/update-profile
  */
-router.put("/update-profile", userController.updateUser);
+router.put(
+  "/update-profile",
+  upload.single("image"),
+  userController.updateUser,
+);
 
 /**
  * Patch /api/v1/users/profile-image
  */
-router.patch("/profile-image", userController.updateUserProfileImage);
+router.patch(
+  "/profile-image",
+  upload.single("image"),
+  userController.updateUserProfileImage,
+);
 
 /**
  * Delete /api/v1/users/:id
@@ -53,6 +66,11 @@ router.delete("/:id", checkRole(ROLE_ADMIN), userController.deleteUser);
 /**
  * Patch /api/v1/users/:id/roles
  */
-router.patch("/:id/roles", checkRole(ROLE_ADMIN), validate(updateRolesSchema), userController.updateUserRoles);
+router.patch(
+  "/:id/roles",
+  checkRole(ROLE_ADMIN),
+  validate(updateRolesSchema),
+  userController.updateUserRoles,
+);
 
 export default router;
