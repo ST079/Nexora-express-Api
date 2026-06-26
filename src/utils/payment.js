@@ -17,22 +17,19 @@ const payViaKhalti = async (data) => {
       },
     };
 
-    const response = await axios.post(
-      config.khalit.api_url,
-      body,
-      {
-        headers: {
-          Authorization: "Key " + config.khalit.api_key,
-        },
+    const response = await axios.post(config.khalti.api_url, body, {
+      headers: {
+        Authorization: "Key " + config.khalti.api_key,
       },
-    );
+    });
 
     return response.data;
   } catch (error) {
-    console.error(
-      "Error initiating payment:",
-      error.response ? error.response.data : error.message,
-    );
+    // console.error(
+    //   "Error initiating payment:",
+    //   error.response ? error.response.data : error.message,
+    // );
+    return error.response ? error.response.data : error.message
   }
 };
 
