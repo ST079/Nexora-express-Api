@@ -4,7 +4,6 @@ dotenv.config();
 import cors from "cors";
 
 import express from "express";
-import multer from "multer";
 import connectCloudinary from "./config/cloudinary.js";
 import config from "./config/config.js";
 

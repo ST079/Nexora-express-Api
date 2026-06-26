@@ -5,6 +5,8 @@ import checkRole from "../middlewares/checkRole.js";
 import { ROLE_ADMIN, ROLE_MERCHANT } from "../constants/roles.js";
 import { validate } from "../middlewares/validate.js";
 import { productSchema } from "../libs/schemas/productSchema.js";
+import multer from "multer";
+
 const router = express.Router();
 
 // const upload = multer({ dest: "uploads/" });
