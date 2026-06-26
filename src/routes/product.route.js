@@ -7,6 +7,9 @@ import { validate } from "../middlewares/validate.js";
 import { productSchema } from "../libs/schemas/productSchema.js";
 const router = express.Router();
 
+// const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: multer.memoryStorage() }); //temp storage in ram to get buffer.
+
 /**
  * GET /api/v1/products/
  */
@@ -24,6 +27,7 @@ router.post(
   "/",
   auth,
   checkRole(ROLE_MERCHANT, ROLE_ADMIN),
+  upload.array("images"),
   validate(productSchema),
   productControllers.createProduct,
 );
@@ -35,6 +39,7 @@ router.put(
   "/:id",
   auth,
   checkRole(ROLE_MERCHANT, ROLE_ADMIN),
+  upload.array("images"),
   productControllers.updateProduct,
 );
 

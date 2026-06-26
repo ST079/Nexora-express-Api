@@ -24,10 +24,14 @@ import orderRoutes from "./routes/order.route.js";
 // server banaune, route haru define garne, middleware haru use garne, etc.
 const app = express();
 
-app.use(cors());
-
-// const upload = multer({ dest: "uploads/" });
-const upload = multer({ storage: multer.memoryStorage() }); //temp storage in ram to get buffer.
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
 app.get("/", (req, res) => {
   res.send({
@@ -47,11 +51,7 @@ app.use(logger);
 app.set("view engine", "hbs");
 
 // Routes
-app.use(
-  process.env.VERSION + "/products",
-  upload.array("images"),
-  productRoutes,
-);
+app.use(process.env.VERSION + "/products", productRoutes);
 
 app.use(
   process.env.VERSION + "/users",
