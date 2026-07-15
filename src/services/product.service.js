@@ -4,23 +4,33 @@ import promptAi from "../utils/ai.js";
 import uploadFiles from "../utils/fileUploader.js";
 
 const getAllProducts = async (payload) => {
-  const { category, brands, name, min, max, limit, offset, createdBy } = payload;
+  const { category, brands, name, min, max, limit, offset, createdBy } =
+    payload;
   const filters = {};
   const sort = payload.sort ? JSON.parse(payload.sort) : {};
 
   if (category) filters.category = { $regex: category, $options: "i" };
-  if (brands) filters.brands = { $in: brands.split(",") };
+  // if (brands) filters.brand = { $in: brands.split(",") };
+  if (brands) {
+    filters.$or = brands.split(",").map((brand) => ({
+      brand: {
+        $regex: `^${brand.trim()}$`,
+        $options: "i",
+      },
+    }));
+  }
   if (name) filters.name = { $regex: name, $options: "i" };
   if (min) filters.price = { $gte: min };
   if (max) filters.price = { ...filters.price, $lte: max };
   if (createdBy) filters.createdBy = createdBy;
 
+  console.log(brands);
   const productData = await productModel
     .find(filters)
     .sort(sort)
     .limit(limit ? parseInt(limit) : 0)
     .skip(offset ? parseInt(offset) : 0);
-
+  console.log(productData);
   return productData;
 };
 
