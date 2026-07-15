@@ -9,7 +9,7 @@ const getAllProducts = async (payload) => {
   const sort = payload.sort ? JSON.parse(payload.sort) : {};
 
   if (category) filters.category = { $regex: category, $options: "i" };
-  if (brand) filters.brand = { $in: brand.split(",") };
+  if (brand) filters.brand = { $regex: brand, $options: "i" };
   if (name) filters.name = { $regex: name, $options: "i" };
   if (min) filters.price = { $gte: min };
   if (max) filters.price = { ...filters.price, $lte: max };
