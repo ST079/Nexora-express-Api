@@ -1,17 +1,20 @@
 import { verifyJwt } from "../utils/token.js";
 
 const auth = async (req, res, next) => {
-  let token;
   const authHeader = req.headers.authorization;
+  let token;
 
   if (authHeader && authHeader.startsWith("Bearer ")) {
+
     token = authHeader.split(" ")[1];
+    
+  } else {
     const cookie = req.headers.cookie;
 
     if (!cookie)
       return res.status(401).json({ message: "User not authenticated." });
 
-     token = cookie.split("=")[1];
+    token = cookie.split("=")[1];
   }
 
   if (!token)
