@@ -5,9 +5,7 @@ const auth = async (req, res, next) => {
   let token;
 
   if(authHeader && authHeader.startsWith("Bearer ")){
-    token = authHeader.split(" ").[1]
-  }
-  else{
+    token = authHeader.split(" ")[1]
     const cookie = req.headers.cookie;
 
     if (!cookie)
