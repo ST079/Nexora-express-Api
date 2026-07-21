@@ -8,9 +8,7 @@ const getAllProducts = async (payload) => {
     payload;
   const filters = {};
   const sort = payload.sort ? JSON.parse(payload.sort) : {};
-
   if (category) filters.category = { $regex: category, $options: "i" };
-  // if (brands) filters.brand = { $in: brands.split(",") };
   if (brands) {
     filters.$or = brands.split(",").map((brand) => ({
       brand: {
