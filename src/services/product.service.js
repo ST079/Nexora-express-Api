@@ -64,7 +64,7 @@ const createProduct = async (payload, files, userId) => {
 const updateProduct = async (id, payload, files) => {
   await getProductById(id);
 
-  const updateData = data;
+  const updateData = payload;
 
   if (files && files.length > 0) {
     const uploadedFiles = await uploadFiles(files);
