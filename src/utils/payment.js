@@ -32,7 +32,7 @@ const payViaKhalti = async (data) => {
 const payViaStripe = async (data) => {
   const stripe = new Stripe(config.stripe_Secret_Key);
 
-  await stripe.paymentIntents.create({
+  return await stripe.paymentIntents.create({
     amount: data.amount,
     currency: data.currency || "npr",
     metadata: {

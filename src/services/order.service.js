@@ -141,7 +141,7 @@ const orderPaymentViaStripe = async (orderId) => {
   });
 
   return await payViaStripe({
-    amount: order.totalPrice, // Convert to paisa
+    amount: order.totalPrice,
     purchase_order_id: orderId,
     purchase_order_name: order.orderItems[0].product.name,
     customer_info: {
