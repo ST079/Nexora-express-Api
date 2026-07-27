@@ -117,7 +117,7 @@ const orderPaymentViaKhalti = async (orderId) => {
 
   return await payViaKhalti({
     amount: order.totalPrice, // Convert to paisa
-    purchase_order_id: order.orderNumber,
+    purchase_order_id: orderId,
     purchase_order_name: order.orderItems[0].product.name,
     customer_info: {
       name: order.user.name,
