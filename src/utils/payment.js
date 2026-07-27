@@ -5,7 +5,7 @@ import config from "../config/config.js";
 const payViaKhalti = async (data) => {
   try {
     const body = {
-      return_url: `${config.app_url}/${config.return_url}`,
+      return_url: `${config.app_url}/${config.khalti.return_url}`,
       website_url: config.app_url,
       amount: data.amount * 100, // Convert to paisa
       purchase_order_id: data.purchase_order_id,
