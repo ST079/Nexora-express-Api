@@ -26,6 +26,7 @@ const config = {
   },
   emailApiKey: process.env.EMAIL_API_KEY || "",
   geminiApiKey: process.env.GEMINI_API_KEY || "",
+  stripe_Secret_Key: process.env.STRIPE_SECRET_KEY || "",
 };
 
 export default config;

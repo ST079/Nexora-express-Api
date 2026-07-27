@@ -45,6 +45,12 @@ router.post(
   orderController.orderPaymentViaKhalti,
 );
 
+router.post(
+  "/:id/payment/stripe",
+  checkRole(ROLE_USER),
+  orderController.orderPaymentViaStripe,
+);
+
 router.put(
   "/:id/confirm-payment",
   checkRole(ROLE_USER),

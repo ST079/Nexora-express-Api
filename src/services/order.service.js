@@ -6,8 +6,9 @@ import { ROLE_ADMIN } from "../constants/roles.js";
 import orderModel from "../models/Order.js";
 import paymentModel from "../models/Payment.js";
 import crypto from "crypto";
-import { payViaKhalti } from "../utils/payment.js";
+import { payViaKhalti, payViaStripe } from "../utils/payment.js";
 import {
+  PAYMENT_METHOD_CARD,
   PAYMENT_METHOD_COD,
   PAYMENT_METHOD_ONLINE,
 } from "../constants/paymentMethods.js";
@@ -116,6 +117,30 @@ const orderPaymentViaKhalti = async (orderId) => {
   });
 
   return await payViaKhalti({
+    amount: order.totalPrice,
+    purchase_order_id: orderId,
+    purchase_order_name: order.orderItems[0].product.name,
+    customer_info: {
+      name: order.user.name,
+      email: order.user.email,
+      phone: order.user.phone,
+    },
+  });
+};
+
+const orderPaymentViaStripe = async (orderId) => {
+  const order = await getOrderById(orderId);
+
+  const orderPayment = await paymentModel.create({
+    method: PAYMENT_METHOD_CARD,
+    amount: order.totalPrice,
+  });
+
+  await orderModel.findByIdAndUpdate(orderId, {
+    payment: orderPayment._id,
+  });
+
+  return await payViaStripe({
     amount: order.totalPrice, // Convert to paisa
     purchase_order_id: orderId,
     purchase_order_name: order.orderItems[0].product.name,
@@ -217,6 +242,7 @@ export default {
   cancelOrder,
   updateOrderStatus,
   orderPaymentViaKhalti,
+  orderPaymentViaStripe,
   orderPaymentViaCash,
   confirmOrderPayment,
   getOrdersByMerchant,
