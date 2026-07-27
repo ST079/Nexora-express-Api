@@ -17,6 +17,7 @@ const config = {
   khalti: {
     api_url: process.env.KHALTI_API_URL || "",
     api_key: process.env.KHALTI_API_KEY || "",
+    return_url: process.env.KHALTI_RETURN_URL || "",
   },
   cloudinary: {
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "",

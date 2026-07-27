@@ -5,8 +5,8 @@ import config from "../config/config.js";
 const payViaKhalti = async (data) => {
   try {
     const body = {
-      return_url: "http://localhost:5000/",
-      website_url: "http://localhost:5000/",
+      return_url: `${config.appUrl}/${config.return_url}`,
+      website_url: `${config.appUrl}`,
       amount: data.amount * 100, // Convert to paisa
       purchase_order_id: data.purchase_order_id,
       purchase_order_name: data.purchase_order_name,
@@ -25,11 +25,7 @@ const payViaKhalti = async (data) => {
 
     return response.data;
   } catch (error) {
-    // console.error(
-    //   "Error initiating payment:",
-    //   error.response ? error.response.data : error.message,
-    // );
-    return error.response ? error.response.data : error.message
+    return error.response ? error.response.data : error.message;
   }
 };
 
