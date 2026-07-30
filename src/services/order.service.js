@@ -24,7 +24,8 @@ const getAllOrders = async () => {
     .find()
     .sort({ createdAt: -1 })
     .populate("user", "name email phone")
-    .populate("orderItems.product", "name brand category price imageUrls");
+    .populate("orderItems.product", "name brand category price imageUrls")
+    .populate("payment", "method status");
 };
 
 const getOrdersByUser = async (userId) => {
@@ -39,7 +40,8 @@ const getOrderById = async (orderId) => {
   const order = await orderModel
     .findById(orderId)
     .populate("user", "name email phone roles")
-    .populate("orderItems.product", "name brand category price imageUrls");
+    .populate("orderItems.product", "name brand category price imageUrls")
+    .populate("payment", "method status");
 
   if (!order)
     throw {
