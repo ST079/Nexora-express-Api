@@ -53,7 +53,25 @@ const deleteProduct = async (req, res, next) => {
   try {
     await productService.deleteProduct(req.params.id);
     res.json({ message: "Product Deleted Successfully", id: req.params.id });
-  } catch (err) {
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getBrands = async (req, res, next) => {
+  try {
+    const data = await productService.getBrands();
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getCategories = async (req, res, next) => {
+  try {
+    const data = await productService.getCategories();
+    res.json(data);
+  } catch (error) {
     next(error);
   }
 };
@@ -64,4 +82,6 @@ export default {
   createProduct,
   updateProduct,
   deleteProduct,
+  getBrands,
+  getCategories,
 };

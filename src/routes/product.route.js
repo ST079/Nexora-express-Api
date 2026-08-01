@@ -18,6 +18,18 @@ const upload = multer({ storage: multer.memoryStorage() }); //temp storage in ra
 router.get("/", productControllers.getAllProducts);
 
 /**
+ * GET /api/v1/brands
+ */
+
+router.get("/brands", productControllers.getBrands);
+
+/**
+ * GET /api/v1/categories
+ */
+
+router.get("/categories", productControllers.getCategories);
+
+/**
  * GET /api/v1/products/:id
  */
 router.get("/:id", productControllers.getProductById);
