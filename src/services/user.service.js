@@ -7,7 +7,7 @@ const createUser = async (payload) => {
   return await authService.register(payload);
 };
 
-const getAllUser = async () => {
+const getAllUser = async (query) => {
   const { name, limit, offset } = query;
 
   const sort = query.sort ? JSON.parse(query.sort) : {};
