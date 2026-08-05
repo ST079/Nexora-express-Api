@@ -71,7 +71,6 @@ const deleteUser = async (id) => {
 
 const updateUserRoles = async (id, roles) => {
   await getUserById(id);
-
   return await userModel.findByIdAndUpdate(id, { roles }, { new: true });
 };
 

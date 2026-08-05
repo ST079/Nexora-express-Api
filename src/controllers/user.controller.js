@@ -84,7 +84,7 @@ const updateUserRoles = async (req, res, next) => {
     const id = req.params.id;
     const roles = req.body.roles;
 
-    const updatedUser = await userService.updateUserRole(id, roles);
+    const updatedUser = await userService.updateUserRoles(id, roles);
     res.status(200).json(updatedUser);
   } catch (error) {
     next(error);
