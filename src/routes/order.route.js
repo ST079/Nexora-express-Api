@@ -24,6 +24,8 @@ router.get(
   orderController.getOrdersByMerchant,
 );
 
+router.get("/count", orderController.getTotalCount);
+
 router.get("/:id", auth, checkRole(ROLE_USER), orderController.getOrderById);
 
 router.post("/", auth, validate(orderSchema), orderController.createOrder);

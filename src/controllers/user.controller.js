@@ -91,6 +91,15 @@ const updateUserRoles = async (req, res, next) => {
   }
 };
 
+const getTotalCount = async (req, res, next) => {
+  try {
+    const data = await userService.getTotalCount();
+    res.json({ totalCount: data });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   createUser,
   getAllUser,
@@ -100,4 +109,5 @@ export default {
   deleteUser,
   getLoggedInUser,
   updateUserRoles,
+  getTotalCount,
 };

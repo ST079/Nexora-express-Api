@@ -118,6 +118,15 @@ const getOrdersByMerchant = async (req, res, next) => {
   }
 };
 
+const getTotalCount = async (req, res, next) => {
+  try {
+    const data = await orderService.getTotalCount();
+    res.json({ totalCount: data });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   getAllOrders,
   getOrdersByUser,
@@ -131,4 +140,5 @@ export default {
   orderPaymentViaCash,
   confirmOrderPayment,
   getOrdersByMerchant,
+  getTotalCount,
 };

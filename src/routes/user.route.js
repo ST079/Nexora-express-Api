@@ -24,6 +24,11 @@ router.get("/", checkRole(ROLE_ADMIN), userController.getAllUser);
 router.get("/me", userController.getLoggedInUser);
 
 /**
+ * GET /api/v1/users/count
+ */
+router.get("/count", userController.getTotalCount);
+
+/**
  * GET /api/v1/users/:id
  */
 

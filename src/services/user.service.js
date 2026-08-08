@@ -74,6 +74,10 @@ const updateUserRoles = async (id, roles) => {
   return await userModel.findByIdAndUpdate(id, { roles }, { new: true });
 };
 
+const getTotalCount = async ()=>{
+  return await userModel.countDocuments();
+}
+
 export default {
   createUser,
   getAllUser,
@@ -82,4 +86,5 @@ export default {
   updateUserProfileImage,
   deleteUser,
   updateUserRoles,
+  getTotalCount,
 };

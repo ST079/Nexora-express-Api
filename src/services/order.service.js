@@ -235,6 +235,10 @@ const getOrdersByMerchant = async (merchantId) => {
   ]);
 };
 
+const getTotalCount = async ()=>{
+  return await orderModel.countDocuments();
+}
+
 export default {
   getAllOrders,
   getOrdersByUser,
@@ -248,4 +252,5 @@ export default {
   orderPaymentViaCash,
   confirmOrderPayment,
   getOrdersByMerchant,
+  getTotalCount,
 };
