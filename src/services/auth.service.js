@@ -28,8 +28,10 @@ const login = async (payload) => {
     roles: user.roles,
     phone: user.phone,
     isActive: user.isActive,
+    profileImageUrl: user.profileImageUrl,
   };
 };
+
 
 const register = async (payload) => {
   const user = await userModel.findOne({
@@ -50,6 +52,7 @@ const register = async (payload) => {
     roles: newUser.roles,
     phone: newUser.phone,
     isActive: newUser.isActive,
+    profileImageUrl: newUser.profileImageUrl,
   };
 };
 
