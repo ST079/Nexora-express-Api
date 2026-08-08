@@ -30,6 +30,11 @@ router.get("/brands", productControllers.getBrands);
 router.get("/categories", productControllers.getCategories);
 
 /**
+ * GET /api/v1/products/count
+ */
+router.get("/count", productControllers.getTotalCount);
+
+/**
  * GET /api/v1/products/:id
  */
 router.get("/:id", productControllers.getProductById);

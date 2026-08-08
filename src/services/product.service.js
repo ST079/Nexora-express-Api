@@ -89,6 +89,10 @@ const getCategories = async () => {
   return await productModel.distinct("category");
 };
 
+const getTotalCount = async ()=>{
+  return await productModel.countDocuments();
+}
+
 export default {
   getAllProducts,
   getProductById,
@@ -97,4 +101,5 @@ export default {
   deleteProduct,
   getBrands,
   getCategories,
+  getTotalCount,
 };

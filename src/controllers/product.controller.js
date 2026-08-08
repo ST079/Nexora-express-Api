@@ -76,6 +76,15 @@ const getCategories = async (req, res, next) => {
   }
 };
 
+const getTotalCount = async (req, res, next) => {
+  try {
+    const data = await productService.getTotalCount();
+    res.json({ totalCount: data });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   getAllProducts,
   getProductById,
@@ -84,4 +93,5 @@ export default {
   deleteProduct,
   getBrands,
   getCategories,
+  getTotalCount,
 };
