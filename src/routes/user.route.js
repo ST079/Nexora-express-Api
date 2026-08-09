@@ -49,7 +49,7 @@ router.post(
  * Put /api/v1/users/update-profile
  */
 router.put(
-  "/update-profile",
+  "/:id/update-profile",
   upload.single("image"),
   userController.updateUser,
 );
