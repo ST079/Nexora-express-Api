@@ -19,10 +19,16 @@ import {
 } from "../constants/paymentStatuses.js";
 import mongoose from "mongoose";
 
-const getAllOrders = async () => {
+const getAllOrders = async (payload) => {
+  const { limit, offset, status, createdBy } = payload;
+  const filters = {};
+  if (status) filters.status = status;
+  if (createdBy) filters.createdBy = createdBy;
   return await orderModel
-    .find()
+    .find(filters)
     .sort({ createdAt: -1 })
+    .limit(limit ? parseInt(limit) : 0)
+    .skip(offset ? parseInt(offset) : 0)
     .populate("user", "name email phone")
     .populate("orderItems.product", "name brand category price imageUrls")
     .populate("payment", "method status");
@@ -235,9 +241,9 @@ const getOrdersByMerchant = async (merchantId) => {
   ]);
 };
 
-const getTotalCount = async ()=>{
+const getTotalCount = async () => {
   return await orderModel.countDocuments();
-}
+};
 
 export default {
   getAllOrders,
